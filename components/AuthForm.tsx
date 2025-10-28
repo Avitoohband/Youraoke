@@ -13,7 +13,9 @@ interface AuthFormProps {
 export function AuthForm({ mode }: AuthFormProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
@@ -33,6 +35,13 @@ export function AuthForm({ mode }: AuthFormProps) {
           router.refresh()
         }
       } else {
+        // Validate password confirmation for signup
+        if (password !== confirmPassword) {
+          setError('Passwords do not match')
+          setLoading(false)
+          return
+        }
+        
         const result = await signup(email, password)
         if (result.error) {
           setError(result.error)
@@ -94,6 +103,36 @@ export function AuthForm({ mode }: AuthFormProps) {
         </div>
       </div>
 
+      {mode === 'signup' && (
+        <div className={styles.formGroup}>
+          <label htmlFor="confirmPassword" className={styles.label}>
+            Confirm Password
+          </label>
+          <div className={styles.passwordWrapper}>
+            <input
+              id="confirmPassword"
+              type={showConfirmPassword ? 'text' : 'password'}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              minLength={6}
+              className={styles.input}
+              placeholder="••••••••"
+              disabled={loading}
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className={styles.togglePassword}
+              disabled={loading}
+              aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+            >
+              {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
+            </button>
+          </div>
+        </div>
+      )}
+
       {error && (
         <div className={error.includes('Check your email') ? styles.success : styles.error}>
           {error}
@@ -113,12 +152,19 @@ export function AuthForm({ mode }: AuthFormProps) {
 
       <div className={styles.footer}>
         {mode === 'login' ? (
-          <p>
-            Don't have an account?{' '}
-            <a href="/signup" className={styles.link}>
-              Sign up
-            </a>
-          </p>
+          <>
+            <p>
+              Don't have an account?{' '}
+              <a href="/signup" className={styles.link}>
+                Sign up
+              </a>
+            </p>
+            <p className={styles.forgotPassword}>
+              <a href="/forgot-password" className={styles.link}>
+                Forgot password?
+              </a>
+            </p>
+          </>
         ) : (
           <p>
             Already have an account?{' '}
