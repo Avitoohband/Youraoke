@@ -1,7 +1,6 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
-import { cookies } from 'next/headers'
 import type { Singer, Song } from '@/types/database.types'
 import { fetchSingerImageFromWikipedia } from '@/utils/wikipedia'
 
@@ -10,8 +9,7 @@ export async function addSinger(
   songTitle: string,
   language: 'en' | 'he'
 ) {
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = await createClient()
 
   const {
     data: { user },
@@ -70,8 +68,7 @@ export async function addSong(
   songTitle: string,
   language: 'en' | 'he'
 ) {
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = await createClient()
 
   const { data: song, error } = await supabase
     .from('songs')
@@ -91,8 +88,7 @@ export async function addSong(
 }
 
 export async function deleteSinger(singerId: string) {
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = await createClient()
 
   const { error } = await supabase
     .from('singers')
@@ -107,8 +103,7 @@ export async function deleteSinger(singerId: string) {
 }
 
 export async function deleteSong(songId: string) {
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = await createClient()
 
   const { error } = await supabase
     .from('songs')

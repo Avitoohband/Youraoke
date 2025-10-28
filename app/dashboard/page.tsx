@@ -1,12 +1,10 @@
 import { createClient } from '@/utils/supabase/server'
-import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { DashboardClient } from '@/components/DashboardClient'
 import type { SingerWithSongs } from '@/types/database.types'
 
 export default async function DashboardPage() {
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = await createClient()
 
   const {
     data: { user },
