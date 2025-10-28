@@ -16,6 +16,16 @@
   color: var(--text-primary);
 }
 
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordWrapper .input {
+  padding-right: 3rem;
+}
+
 .input {
   padding: 0.875rem 1rem;
   background: var(--bg-primary);
@@ -24,6 +34,7 @@
   color: var(--text-primary);
   font-size: 1rem;
   transition: all 0.2s;
+  width: 100%;
 }
 
 .input:focus {
@@ -37,6 +48,32 @@
   cursor: not-allowed;
 }
 
+.togglePassword {
+  position: absolute;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.togglePassword:hover:not(:disabled) {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.togglePassword:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 .button {
   padding: 0.875rem 1rem;
   background: var(--primary-color);
@@ -47,6 +84,10 @@
   font-weight: 600;
   transition: all 0.2s;
   margin-top: 0.5rem;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .button:hover:not(:disabled) {
@@ -56,9 +97,15 @@
 }
 
 .button:disabled {
-  opacity: 0.6;
+  opacity: 0.8;
   cursor: not-allowed;
   transform: none;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .error {

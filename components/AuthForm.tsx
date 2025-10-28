@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './AuthForm.module.css'
 import { login, signup } from '@/app/actions/auth'
+import { LoadingSpinner } from './LoadingSpinner'
 
 interface AuthFormProps {
   mode: 'login' | 'signup'
@@ -12,6 +13,7 @@ interface AuthFormProps {
 export function AuthForm({ mode }: AuthFormProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
@@ -68,17 +70,28 @@ export function AuthForm({ mode }: AuthFormProps) {
         <label htmlFor="password" className={styles.label}>
           Password
         </label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          minLength={6}
-          className={styles.input}
-          placeholder="••••••••"
-          disabled={loading}
-        />
+        <div className={styles.passwordWrapper}>
+          <input
+            id="password"
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            minLength={6}
+            className={styles.input}
+            placeholder="••••••••"
+            disabled={loading}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className={styles.togglePassword}
+            disabled={loading}
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
+          >
+            {showPassword ? '👁️' : '👁️‍🗨️'}
+          </button>
+        </div>
       </div>
 
       {error && (
@@ -88,7 +101,14 @@ export function AuthForm({ mode }: AuthFormProps) {
       )}
 
       <button type="submit" className={styles.button} disabled={loading}>
-        {loading ? 'Loading...' : mode === 'login' ? 'Sign In' : 'Sign Up'}
+        {loading ? (
+          <span className={styles.buttonContent}>
+            <LoadingSpinner size="small" />
+            <span>{mode === 'login' ? 'Signing In...' : 'Signing Up...'}</span>
+          </span>
+        ) : (
+          mode === 'login' ? 'Sign In' : 'Sign Up'
+        )}
       </button>
 
       <div className={styles.footer}>
