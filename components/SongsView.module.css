@@ -1,0 +1,230 @@
+.container {
+  padding: 2rem;
+  max-width: 1400px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+}
+
+.singerImageLarge {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, var(--bg-hover) 0%, var(--border-color) 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.singerImageLarge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.singerDetails {
+  flex: 1;
+}
+
+.singerType {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.singerName {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.singerStats {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.actions {
+  margin-bottom: 2rem;
+}
+
+.deleteButton {
+  padding: 0.75rem 2rem;
+  background: transparent;
+  border: 1px solid var(--text-secondary);
+  border-radius: 24px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.deleteButton:hover:not(:disabled) {
+  border-color: var(--text-primary);
+  transform: scale(1.05);
+}
+
+.deleteButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.songsSection {
+  margin-top: 2rem;
+}
+
+.songsHeader {
+  display: grid;
+  grid-template-columns: 50px 1fr 150px 50px;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.columnNumber,
+.columnTitle,
+.columnLanguage,
+.columnActions {
+  display: flex;
+  align-items: center;
+}
+
+.songsList {
+  margin-top: 1rem;
+}
+
+.songRow {
+  display: grid;
+  grid-template-columns: 50px 1fr 150px 50px;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  align-items: center;
+}
+
+.songRow:hover {
+  background: var(--bg-hover);
+}
+
+.songNumber {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.songTitle {
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.songTitle:hover:not(:disabled) {
+  color: var(--primary-color);
+}
+
+.songTitle:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.songLanguage {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.songActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.deleteSongButton {
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  opacity: 0;
+}
+
+.songRow:hover .deleteSongButton {
+  opacity: 1;
+}
+
+.deleteSongButton:hover:not(:disabled) {
+  color: var(--error-color);
+  background: rgba(226, 33, 52, 0.1);
+}
+
+.deleteSongButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.noSongs {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .singerImageLarge {
+    width: 150px;
+    height: 150px;
+    font-size: 4rem;
+  }
+
+  .singerName {
+    font-size: 2rem;
+  }
+
+  .songsHeader {
+    grid-template-columns: 40px 1fr 100px 40px;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .songRow {
+    grid-template-columns: 40px 1fr 100px 40px;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .songLanguage {
+    font-size: 0.75rem;
+  }
+}
+

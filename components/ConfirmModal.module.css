@@ -1,0 +1,137 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  animation: slideUp 0.2s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.content {
+  padding: 2rem;
+}
+
+.message {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.cancelButton,
+.confirmButton,
+.deleteButton {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.cancelButton {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.cancelButton:hover {
+  background: var(--bg-hover);
+}
+
+.confirmButton {
+  background: var(--primary-color);
+  color: white;
+}
+
+.confirmButton:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+}
+
+.deleteButton {
+  background: var(--error-color);
+  color: white;
+}
+
+.deleteButton:hover {
+  background: #c91e2e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(226, 33, 52, 0.3);
+}
+
+@media (max-width: 600px) {
+  .modal {
+    margin: 0 1rem;
+  }
+
+  .header {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+
+  .actions {
+    padding: 1.25rem 1.5rem;
+    flex-direction: column-reverse;
+  }
+}
+
